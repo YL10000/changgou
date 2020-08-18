@@ -1,0 +1,44 @@
+server:
+  port: 7004
+spring:
+  application:
+    name: gateway-system
+  cloud:
+    gateway:
+      routes:
+        - id: goods  #路由名称
+          uri: lb://goods-service # 路由终点，lb表示以负载均衡的方式进行发送
+          predicates:
+            - Path=/goods/**
+          filters:
+            - StripPrefix=1 # 发送时去掉前缀
+            - name: RequestRateLimiter #请求数据限流
+              args:
+                key-resolver: "#{@hostKey}" #用于限流的key的名字，使用#{@beanName}
+                redis-rate-limiter.replenishRate: 1 #令牌桶每秒填充个数
+                redis-rate-limiter.burstCapacity: 1 #令牌桶总容量
+        - id: system # 后台管理系统
+          uri: lb://system-service
+          predicates:
+            - Path=/system/**
+      # 网关跨越配置
+      globalcors:
+        cors-configurations:
+          '[/**]': #配置所有请求
+            allowedOrigins: "*" #允许所有跨越
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+  redis:
+    host: 192.168.10.108
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.10.108:7001/eureka/
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
