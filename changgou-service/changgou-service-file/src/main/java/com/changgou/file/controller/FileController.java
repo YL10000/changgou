@@ -45,7 +45,6 @@ public class FileController {
   @GetMapping("download")
   public void downLoadFile(@RequestParam("file") String filePath, HttpServletResponse response) throws Exception {
     String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
-    String ext = filePath.substring(filePath.lastIndexOf(".") + 1);
     InputStream inputStream = fastDFSClient.downFile(filePath);
     byte[] buffer = new byte[inputStream.available()];
     inputStream.read(buffer);

@@ -73,7 +73,7 @@ public class AdminController extends ApiController {
    */
   @PostMapping
   public R insert(@RequestBody Admin admin) {
-
+    //使用随机盐对密码进行加密
     admin.setPassword(BCrypt.hashpw(admin.getPassword(),BCrypt.gensalt()));
     return success(this.adminService.save(admin));
   }

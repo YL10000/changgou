@@ -13,6 +13,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @date 2020/8/13 14:17
  * @since 1.0
  */
+//排除数据库自动配置类，避免加载数据相关信息
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableEurekaClient
 public class DFSApplication {

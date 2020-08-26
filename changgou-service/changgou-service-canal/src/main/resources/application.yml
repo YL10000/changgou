@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: canal-service
+server:
+  port: 7006
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.10.108:7001/eureka/
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+canal:
+  client:
+    instances:
+      example:
+        # canal server地址和端口
+        host: 192.168.10.108
+        port: 11111
+        batchSize: 1000

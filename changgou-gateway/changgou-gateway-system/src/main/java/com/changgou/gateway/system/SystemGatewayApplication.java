@@ -2,6 +2,7 @@ package com.changgou.gateway.system;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
@@ -12,7 +13,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @date 2020/8/14 10:15
  * @since 1.0
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableEurekaClient
 public class SystemGatewayApplication {
   public static void main(String[] args) {

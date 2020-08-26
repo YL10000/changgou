@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * @since 1.0
  */
 @SpringBootApplication
-@EnableDiscoveryClient
+@EnableDiscoveryClient //启动eureka客户端
 @CrossOrigin
 public class GoodsApplication {
   public static void main(String[] args) {
